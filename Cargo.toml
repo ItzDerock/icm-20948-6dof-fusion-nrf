@@ -1,0 +1,60 @@
+[package]
+name = "gimbaldmp"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+embassy-executor = { version = "0.10.0", features = [
+  "platform-cortex-m",
+  "executor-thread",
+  "defmt",
+] }
+
+embassy-nrf = { version = "0.10.0", features = [
+  "defmt",
+  "nrf52840",
+  "time-driver-rtc1",
+  "gpiote",
+  "time",
+  "unstable-pac",
+] }
+
+embassy-time = { version = "0.5.1", features = [
+  "defmt",
+  "defmt-timestamp-uptime",
+] }
+
+# Serial async traits
+embedded-io-async = { version = "0.7.0", features = ["defmt"] }
+
+# HAL traits needed by esp-hosted SPI driver
+embedded-hal = { version = "1.0" }
+embedded-hal-async = { version = "1.0" }
+
+# Cortex-M runtime
+cortex-m = { version = "0.7.6", features = [
+  "inline-asm",
+  "critical-section-single-core",
+] }
+cortex-m-rt = "0.7.0"
+
+# Logging
+defmt = "1.0.1"
+defmt-rtt = "1.0.0"
+panic-reset = "0.1.1"
+
+embassy-futures = { version = "0.1.2" }
+heapless = "0.8"
+static_cell = "2"
+ufmt = "0.2.0"
+embassy-sync = "0.8.0"
+ahrs = { version = "0.8.0", default-features = false }
+nalgebra = { version = "0.34.2", default-features = false }
+icm20948-async = "0.6.0"
+thiserror = { version = "2.0.18", default-features = false }
+
+[patch.crates-io]
+icm20948-async = { path = "vendor/icm20948-async" }
+
+[profile.release]
+debug = 2
