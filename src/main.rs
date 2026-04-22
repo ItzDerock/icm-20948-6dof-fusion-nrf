@@ -105,7 +105,7 @@ async fn main(_spawner: Spawner) {
     Timer::after_millis(100).await;
 
     let _ = uarte.write("Calibrating gyro...\r\n".as_bytes()).await;
-    if icm_handler.calibrate_gyro_if_still().await {
+    if icm_handler.calibrate_gyro_if_still().await.is_some() {
         let _ = uarte.write("Gyro calibrated.\r\n".as_bytes()).await;
     } else {
         let _ = uarte
